@@ -5,15 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const finalPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
-  mode: 'development',
   entry: './src/js/index.js',
   output: {
     path: finalPath,
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    port: 2002,
   },
   module: {
     rules: [
@@ -31,8 +25,18 @@ module.exports = {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ]
       },
       {
@@ -55,7 +59,7 @@ module.exports = {
       { from: './src/img', to: path.join(finalPath, '/img'), force: true },
     ]),
     new MiniCssExtractPlugin({
-        filename: 'style.css',
+      filename: 'style.css',
     })
   ]
 }
