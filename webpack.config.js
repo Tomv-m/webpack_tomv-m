@@ -8,12 +8,12 @@ module.exports = {
   mode: 'development',
   entry: './src/js/index.js',
   output: {
-    path: finalPath
+    path: finalPath,
   },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
-    port: 2002
+    port: 2002,
   },
   module: {
     rules: [
@@ -32,7 +32,7 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
+          'sass-loader',
         ]
       },
       {
@@ -46,14 +46,6 @@ module.exports = {
             },
           },
         ],
-      },
-      {
-        test: /\.(glsl|vs|fs|vert|frag)$/,
-        exclude: /node_modules/,
-        use: [
-          'raw-loader',
-          'glslify-loader'
-        ]
       }
     ]
   },
