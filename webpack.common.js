@@ -50,13 +50,26 @@ module.exports = {
             },
           },
         ],
-      }
+      },
+      {
+        test: /\.(woff|woff2|ttf|otf|eot)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts',
+            },
+          },
+        ],
+      },
     ]
   },
   plugins: [
     new CopyPlugin([
       { from: './public', to: finalPath, force: true },
-      { from: './src/img', to: path.join(finalPath, '/img'), force: true },
+      { from: './src/fonts', to: path.join(finalPath, '/fonts'), force: true },
+      { from: './src/images', to: path.join(finalPath, '/images'), force: true },
     ]),
     new MiniCssExtractPlugin({
       filename: 'style.css',
